@@ -160,7 +160,7 @@ export const ImageUpload = () => {
   const [isLoading, setIsloading] = useState(false);
   let confidence = 0;
 
-  const sendFile = async () => {
+  const sendFile = useCallback(async () => {
     if (image) {
       let formData = new FormData();
       formData.append("file", selectedFile);
@@ -174,7 +174,15 @@ export const ImageUpload = () => {
       }
       setIsloading(false);
     }
-  }
+  }, [image, selectedFile]);
+
+  useEffect(() => {
+    if (!preview) {
+      return;
+    }
+    setIsloading(true);
+    sendFile();
+  }, [preview, sendFile]);
 
   const clearData = () => {
     setData(null);
