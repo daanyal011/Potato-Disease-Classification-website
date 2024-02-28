@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
-import React, { useState, useEffect, useCallback } from 'react';
+import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { Paper, CardActionArea, CardMedia, Grid, TableContainer, Table, TableBody, TableHead, TableRow, TableCell, Button, CircularProgress } from "@material-ui/core";
@@ -160,7 +160,7 @@ export const ImageUpload = () => {
   const [isLoading, setIsloading] = useState(false);
   let confidence = 0;
 
-  const sendFile = useCallback(async () => {
+  const sendFile = async () => {
     if (image) {
       let formData = new FormData();
       formData.append("file", selectedFile);
@@ -174,15 +174,7 @@ export const ImageUpload = () => {
       }
       setIsloading(false);
     }
-  }, [image, selectedFile]);
-
-  useEffect(() => {
-    if (!preview) {
-      return;
-    }
-    setIsloading(true);
-    sendFile();
-  }, [preview, sendFile]);
+  }
 
   const clearData = () => {
     setData(null);
@@ -206,7 +198,7 @@ export const ImageUpload = () => {
     }
     setIsloading(true);
     sendFile();
-  }, [preview, sendFile]);
+  }, [preview]);
 
   const onSelectFile = (files) => {
     if (!files || files.length === 0) {
