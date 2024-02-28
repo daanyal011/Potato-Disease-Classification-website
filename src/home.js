@@ -198,7 +198,7 @@ export const ImageUpload = () => {
     }
     setIsloading(true);
     sendFile();
-  }, [preview]);
+  }, [preview]);// eslint-disable-line
 
   const onSelectFile = (files) => {
     if (!files || files.length === 0) {
