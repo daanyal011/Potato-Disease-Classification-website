@@ -162,24 +162,19 @@ export const ImageUpload = () => {
 
   const sendFile = async () => {
     if (image) {
-        let formData = new FormData();
-        formData.append("file", selectedFile);
-        let res = await axios({
+      let formData = new FormData();
+      formData.append("file", selectedFile);
+      let res = await axios({
         method: "post",
         url: process.env.REACT_APP_API_URL,
         data: formData,
-        });
-        if (res.status === 200) {
-            setData(res.data);
-
-            // Add the logging statements here:
-            console.log(typeof res.data.class); // Should be 'string'
-            console.log(typeof res.data.confidence); // Should be 'number'
-        }
-        setIsloading(false);
+      });
+      if (res.status === 200) {
+        setData(res.data);
+      }
+      setIsloading(false);
     }
-}
-
+  }
 
   const clearData = () => {
     setData(null);
@@ -271,10 +266,7 @@ export const ImageUpload = () => {
                     <TableBody className={classes.tableBody}>
                       <TableRow className={classes.tableRow}>
                         <TableCell component="th" scope="row" className={classes.tableCell}>
-                          {data && data.class} 
-                        </TableCell>
-                        <TableCell align="right" className={classes.tableCell}>
-                            {data && data.confidence}%
+                          {data.class}
                         </TableCell>
                         <TableCell align="right" className={classes.tableCell}>{confidence}%</TableCell>
                       </TableRow>
